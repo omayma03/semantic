@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المشاريع المعلقة للاعتماد</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #007BFF, #0056b3);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .project-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .project-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .project-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #007BFF;
+            margin-bottom: 15px;
+        }
+        
+        .project-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            color: #495057;
+            margin-left: 10px;
+            min-width: 80px;
+        }
+        
+        .info-value {
+            color: #6c757d;
+        }
+        
+        .project-abstract {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #007BFF;
+            margin: 15px 0;
+        }
+        
+        .keywords-section {
+            margin: 15px 0;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin: 3px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .domain-tag {
+            display: inline-block;
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+            border: 2px solid #c8e6c9;
+        }
+        
+        .duplicate-warnings {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .duplicate-warnings h4 {
+            margin: 0 0 10px 0;
+            color: #856404;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-approve {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-approve:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .btn-reject {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-reject:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+        
+        .btn-details {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .btn-details:hover {
+            background: #138496;
+            transform: translateY(-2px);
+        }
+        
+        .no-projects {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+        
+        .no-projects h3 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .back-link a {
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: 2px solid #007BFF;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link a:hover {
+            background: #007BFF;
+            color: white;
+        }
+        
+        .status-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+        
+        .flash-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .flash-message.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .flash-message.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .project-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 المشاريع المعلقة للاعتماد</h1>
+            <p>مراجعة واعتماد مشاريع التخرج المقدمة</p>
+        </div>
+        
+        <div class="content">
+            <!-- عرض رسائل Flash -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message {{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            {% if projects %}
+                {% for project in projects %}
+                    <div class="project-card">
+                        <div class="status-badge status-pending">معلق</div>
+                        
+                        <div class="project-title">{{ project.title }}</div>
+                        
+                        <div class="project-info">
+                            <div class="info-item">
+                                <span class="info-label">👨‍🎓 الطالب:</span>
+                                <span class="info-value">{{ project.student }}</span>
+                            </div>
+                            
+                            {% if project.students and project.students|length > 1 %}
+                                <div class="info-item">
+                                    <span class="info-label">👥 المجموعة:</span>
+                                    <span class="info-value">{{ project.students[1:] | join(', ') }}</span>
+                                </div>
+                            {% endif %}
+                            
+                            <div class="info-item">
+                                <span class="info-label">👨‍🏫 المشرف:</span>
+                                <span class="info-value">{{ project.supervisor }}</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">🏛️ القسم:</span>
+                                <span class="info-value">{{ project.department }}</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">📅 السنة:</span>
+                                <span class="info-value">{{ project.year }}</span>
+                            </div>
+                        </div>
+                        
+                        {% if project.domain %}
+                            <div class="domain-tag">🎯 المجال: {{ project.domain }}</div>
+                        {% endif %}
+                        
+                        {% if project.keywords %}
+                            <div class="keywords-section">
+                                <strong>🔑 الكلمات المفتاحية:</strong><br>
+                                {% for keyword in project.keywords %}
+                                    <span class="keyword-tag">{{ keyword }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        
+                        <div class="project-abstract">
+                            <strong>📝 ملخص المشروع:</strong><br>
+                            {{ project.abstract }}
+                        </div>
+                        
+                        {% if project.duplicate_check and project.duplicate_check.warnings %}
+                            <div class="duplicate-warnings">
+                                <h4>⚠️ تحذيرات:</h4>
+                                {% for warning in project.duplicate_check.warnings %}
+                                    <p>• {{ warning.message }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-approve" onclick="approveProject('{{ loop.index0 }}')">
+                                ✅ اعتماد المشروع
+                            </button>
+                            <button class="btn btn-reject" onclick="rejectProject('{{ loop.index0 }}')">
+                                ❌ رفض المشروع
+                            </button>
+                            <a href="{{ project.pdf }}" target="_blank" class="btn btn-details">
+                                📄 عرض ملف PDF
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-projects">
+                    <h3>📭 لا توجد مشاريع معلقة</h3>
+                    <p>جميع المشاريع تم مراجعتها واعتمادها</p>
+                </div>
+            {% endif %}
+            
+            <div class="back-link">
+                <a href="/">🏠 العودة للصفحة الرئيسية</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function approveProject(index) {
+            if (confirm('هل أنت متأكد من اعتماد هذا المشروع؟')) {
+                fetch('/approve/approve-project', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        project_index: parseInt(index),
+                        action: 'approve'
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('✅ تم اعتماد المشروع بنجاح');
+                        location.reload();
+                    } else {
+                        alert('❌ حدث خطأ: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('❌ حدث خطأ في الاتصال');
+                });
+            }
+        }
+        
+        function rejectProject(index) {
+            const reason = prompt('يرجى إدخال سبب الرفض:');
+            if (reason && reason.trim()) {
+                fetch('/approve/approve-project', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        project_index: parseInt(index),
+                        action: 'reject',
+                        reason: reason.trim()
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('❌ تم رفض المشروع');
+                        location.reload();
+                    } else {
+                        alert('❌ حدث خطأ: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('❌ حدث خطأ في الاتصال');
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,1507 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/"
+     xml:base="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:swrla="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#"
+     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology">
+        <owl:imports rdf:resource="file:/F:/New%20folder%20(62)/semantic_project_fixed/ontology/projects_converted.ttl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled -->
+
+    <owl:AnnotationProperty rdf:about="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasProjectBelongingTo"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasProjectBelongingTo"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+            </owl:Restriction>
+        </rdfs:range>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#studentBelongsToDept"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:range>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSubmission"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Submission"/>
+            </owl:Restriction>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#isFinalFileOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#isFinalFileOf"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+            </owl:Restriction>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasProjectBelongingTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasProjectBelongingTo">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSubmission -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSubmission">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasProjectBelongingTo"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#studentBelongsToDept"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSubmission"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Submission"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Submission"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#supervisesProject"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#supervisesProject"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+            </owl:Restriction>
+        </rdfs:range>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#worksInDepartment"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#interestedInDomain -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#interestedInDomain">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#supervisesProject"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#worksInDepartment"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#isFinalFileOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#isFinalFileOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#relatedToDomain -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#relatedToDomain">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#studentBelongsToDept -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#studentBelongsToDept">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasProjectBelongingTo"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#studentBelongsToDept"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSubmission"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Submission"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#supervisesProject -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#supervisesProject"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#worksInDepartment -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#worksInDepartment">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#supervisesProject"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#worksInDepartment"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasAbstract -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasAbstract">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasAcademicYear -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasAcademicYear">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFileLink -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFileLink">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#isFinalFileOf"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasGraduationStatus -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasGraduationStatus">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Submission"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeywordLabel -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeywordLabel">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasProjectTitle -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasProjectTitle">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasStudentName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasStudentName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasProjectBelongingTo"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#studentBelongsToDept"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSubmission"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Submission"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisorName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisorName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#supervisesProject"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#worksInDepartment"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasTechologyName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasTechologyName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#isFinalFileOf"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasEnrolledStudent"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Student">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasProjectBelongingTo"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#studentBelongsToDept"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSubmission"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Submission"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Submission -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Submission"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#supervisesProject"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#worksInDepartment"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#belongsToDepartment"/>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Department"/>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Domain"/>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#mentionsTechnology"/>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#EmergingTechnology"/>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+        <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+        <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Keyword"/>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasFile"/>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+        <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#File"/>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasSupervisor"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Supervisor"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Restriction>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Rules
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/k">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/d">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/s">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p1">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p2">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p3">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description>
+        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
+        <rdfs:comment></rdfs:comment>
+        <rdfs:label>InferProjectDomain</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#Project"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasKeyword"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/k"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#relatedToDomain"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/k"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/d"/>
+                                    </rdf:Description>
+                                </rdf:first>
+                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+    <rdf:Description>
+        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
+        <rdfs:comment></rdfs:comment>
+        <rdfs:label>SupervisorExpertiseDetection</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#supervisesProject"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/s"/>
+                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p1"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p1"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/d"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#supervisesProject"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/s"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p2"/>
+                                    </rdf:Description>
+                                </rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p2"/>
+                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/d"/>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#supervisesProject"/>
+                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/s"/>
+                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p3"/>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                        <rdf:first>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5/AcademicGraduationProjectsOntology#hasDomain"/>
+                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p3"/>
+                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/d"/>
+                                                            </rdf:Description>
+                                                        </rdf:first>
+                                                        <rdf:rest>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                <rdf:first>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
+                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p1"/>
+                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p2"/>
+                                                                    </rdf:Description>
+                                                                </rdf:first>
+                                                                <rdf:rest>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                        <rdf:first>
+                                                                            <rdf:Description>
+                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
+                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p1"/>
+                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p3"/>
+                                                                            </rdf:Description>
+                                                                        </rdf:first>
+                                                                        <rdf:rest>
+                                                                            <rdf:Description>
+                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                <rdf:first>
+                                                                                    <rdf:Description>
+                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
+                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p2"/>
+                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/p3"/>
+                                                                                    </rdf:Description>
+                                                                                </rdf:first>
+                                                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                            </rdf:Description>
+                                                                        </rdf:rest>
+                                                                    </rdf:Description>
+                                                                </rdf:rest>
+                                                            </rdf:Description>
+                                                        </rdf:rest>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+

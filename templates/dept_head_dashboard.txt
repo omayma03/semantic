@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم رئيس القسم</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #007BFF, #0056b3);
+            color: white;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .header-info h1 {
+            margin: 0;
+            font-size: 2.2em;
+            font-weight: 300;
+        }
+        
+        .header-info p {
+            margin: 5px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .header-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .header-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card h3 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        
+        .stat-card p {
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #007BFF;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #e9ecef;
+        }
+        
+        .project-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .project-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .project-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #007BFF;
+            margin-bottom: 15px;
+        }
+        
+        .project-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            color: #495057;
+            margin-left: 10px;
+            min-width: 80px;
+        }
+        
+        .info-value {
+            color: #6c757d;
+        }
+        
+        .project-abstract {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #007BFF;
+            margin: 15px 0;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-approve {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-approve:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .btn-reject {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-reject:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+        
+        .status-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .status-approved {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .no-projects {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6c757d;
+        }
+        
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+        
+        .flash-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .flash-message.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .flash-message.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-info">
+                <h1>🏛️ لوحة تحكم رئيس القسم</h1>
+                <p>{{ head_name }} - قسم {{ department }}</p>
+            </div>
+            <div class="header-actions">
+                <a href="/dept-head/change-password" class="header-btn">🔑 تغيير كلمة المرور</a>
+                <a href="/dept-head/logout" class="header-btn">🚪 تسجيل الخروج</a>
+            </div>
+        </div>
+        
+        <div class="content">
+            <!-- عرض رسائل Flash -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message {{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <!-- إحصائيات سريعة -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>{{ pending_projects|length }}</h3>
+                    <p>مشاريع معلقة للمراجعة</p>
+                </div>
+                <div class="stat-card">
+                    <h3>{{ projects|length }}</h3>
+                    <p>إجمالي مشاريع القسم</p>
+                </div>
+            </div>
+            
+            <!-- المشاريع المعلقة للمراجعة -->
+            <div class="section">
+                <h2 class="section-title">📋 المشاريع المعلقة للمراجعة</h2>
+                
+                {% if pending_projects %}
+                    {% for project in pending_projects %}
+                        <div class="project-card">
+                            <div class="status-badge status-pending">معلق للمراجعة</div>
+                            
+                            <div class="project-title">{{ project.title }}</div>
+                            
+                            <div class="project-info">
+                                <div class="info-item">
+                                    <span class="info-label">👨‍🎓 الطالب:</span>
+                                    <span class="info-value">{{ project.student }}</span>
+                                </div>
+                                
+                                {% if project.students and project.students|length > 1 %}
+                                    <div class="info-item">
+                                        <span class="info-label">👥 المجموعة:</span>
+                                        <span class="info-value">{{ project.students[1:] | join(', ') }}</span>
+                                    </div>
+                                {% endif %}
+                                
+                                <div class="info-item">
+                                    <span class="info-label">👨‍🏫 المشرف:</span>
+                                    <span class="info-value">{{ project.supervisor }}</span>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <span class="info-label">📅 السنة:</span>
+                                    <span class="info-value">{{ project.year }}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-abstract">
+                                <strong>📝 ملخص المشروع:</strong><br>
+                                {{ project.abstract }}
+                            </div>
+                            
+                            <div class="action-buttons">
+                                <button class="btn btn-approve" onclick="approveProject('{{ project.index }}')">
+                                    ✅ اعتماد المشروع
+                                </button>
+                                <button class="btn btn-reject" onclick="rejectProject('{{ project.index }}')">
+                                    ❌ رفض المشروع
+                                </button>
+                                <a href="{{ project.pdf }}" target="_blank" class="btn" style="background: #17a2b8; color: white;">
+                                    📄 عرض ملف PDF
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-projects">
+                        <h3>📭 لا توجد مشاريع معلقة</h3>
+                        <p>جميع المشاريع المقدمة لقسمكم تم مراجعتها</p>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- مشاريع القسم المعتمدة -->
+            <div class="section">
+                <h2 class="section-title">✅ مشاريع القسم المعتمدة</h2>
+                
+                {% if projects %}
+                    {% for project in projects[:5] %}
+                        <div class="project-card">
+                            <div class="status-badge status-approved">معتمد</div>
+                            
+                            <div class="project-title">{{ project.title }}</div>
+                            
+                            <div class="project-info">
+                                <div class="info-item">
+                                    <span class="info-label">👨‍🎓 الطالب:</span>
+                                    <span class="info-value">{{ project.student }}</span>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <span class="info-label">👨‍🏫 المشرف:</span>
+                                    <span class="info-value">{{ project.supervisor }}</span>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <span class="info-label">📅 السنة:</span>
+                                    <span class="info-value">{{ project.year }}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-abstract">
+                                <strong>📝 ملخص المشروع:</strong><br>
+                                {{ project.abstract[:200] }}{% if project.abstract|length > 200 %}...{% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    
+                    {% if projects|length > 5 %}
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="/search" class="btn" style="background: #007BFF; color: white;">
+                                عرض جميع مشاريع القسم ({{ projects|length }})
+                            </a>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="no-projects">
+                        <h3>📭 لا توجد مشاريع معتمدة</h3>
+                        <p>لم يتم اعتماد أي مشاريع لقسمكم بعد</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function approveProject(index) {
+            const comments = prompt('تعليقات الاعتماد (اختياري):');
+            
+            if (confirm('هل أنت متأكد من اعتماد هذا المشروع؟')) {
+                fetch('/dept-head/approve-department-project', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        project_index: parseInt(index),
+                        action: 'approve',
+                        comments: comments || ''
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('✅ تم اعتماد المشروع بنجاح');
+                        location.reload();
+                    } else {
+                        alert('❌ حدث خطأ: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('❌ حدث خطأ في الاتصال');
+                });
+            }
+        }
+        
+        function rejectProject(index) {
+            const comments = prompt('يرجى إدخال سبب الرفض:');
+            if (comments && comments.trim()) {
+                fetch('/dept-head/approve-department-project', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        project_index: parseInt(index),
+                        action: 'reject',
+                        comments: comments.trim()
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('❌ تم رفض المشروع');
+                        location.reload();
+                    } else {
+                        alert('❌ حدث خطأ: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('❌ حدث خطأ في الاتصال');
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+

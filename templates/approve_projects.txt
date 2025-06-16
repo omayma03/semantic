@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>اعتماد المشاريع</title>
+</head>
+<body>
+    <h2>قائمة المشاريع في انتظار الاعتماد</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li style="color: red;">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>اسم الطالب</th>
+            <th>العنوان</th>
+            <th>المشرف</th>
+            <th>القسم</th>
+            <th>السنة</th>
+            <th>الكلمات المفتاحية</th>
+            <th>المجال</th>
+            <th>الإجراء</th>
+        </tr>
+        {% for project in projects %}
+        <tr>
+            <td>{{ project.student }}</td>
+            <td>{{ project.title }}</td>
+            <td>{{ project.supervisor }}</td>
+            <td>{{ project.department }}</td>
+            <td>{{ project.year }}</td>
+            <td>{{ project.keywords | join(', ') }}</td>
+            <td>{{ project.domain }}</td>
+            <td>
+                <form method="POST" action="/approve">
+                    <input type="hidden" name="project_index" value="{{ loop.index0 }}">
+                    <input type="submit" value="✅ اعتماد">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br><br>
+    <a href="/">🔙 رجوع إلى الصفحة الرئيسية</a>
+</body>
+</html>

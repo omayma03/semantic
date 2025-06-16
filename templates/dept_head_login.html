@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل دخول رئيس القسم - البوابة المعرفية</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-back {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            color: #7f8c8d;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-back:hover {
+            border-color: #bdc3c7;
+            color: #2c3e50;
+        }
+
+        .alert {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .alert-error {
+            background: #fee;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+
+        .alert-success {
+            background: #eafaf1;
+            color: #27ae60;
+            border: 1px solid #a9dfbf;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .info-box h4 {
+            color: #495057;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .dept-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .dept-list li {
+            padding: 5px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .dept-list li:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="header">
+            <div class="logo">👨‍🏫</div>
+            <h1>تسجيل دخول رئيس القسم</h1>
+            <p class="subtitle">البوابة المعرفية السحابية</p>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'error' if category == 'error' else 'success' }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/dept-head/login">
+            <div class="form-group">
+                <label for="email">البريد الإلكتروني الجامعي:</label>
+                <input type="email" 
+                       id="email" 
+                       name="email" 
+                       placeholder="example@misuratau.edu.ly"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">كلمة المرور:</label>
+                <input type="password" 
+                       id="password" 
+                       name="password" 
+                       placeholder="أدخل كلمة المرور"
+                       required>
+            </div>
+
+            <button type="submit" class="btn-login">تسجيل الدخول</button>
+        </form>
+
+        <a href="/" class="btn-back">العودة للصفحة الرئيسية</a>
+
+        <div class="info-box">
+            <h4>الأقسام المتاحة:</h4>
+            <ul class="dept-list">
+                <li>• علوم الحاسوب</li>
+                <li>• نظم الإنترنت</li>
+                <li>• الوسائط المتعددة</li>
+                <li>• أمن المعلومات</li>
+                <li>• هندسة البرمجيات</li>
+                <li>• الذكاء الاصطناعي</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتائج البحث</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #007BFF;
+            margin: 0;
+            font-size: 2.5em;
+        }
+        
+        .search-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007BFF;
+        }
+        
+        .search-info strong {
+            color: #007BFF;
+        }
+        
+        .results-count {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .no-results {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .no-results h3 {
+            color: #dc3545;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .no-results p {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+        
+        .result-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-right: 5px solid #007BFF;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .result-title {
+            color: #007BFF;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .result-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .meta-item {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-right: 3px solid #007BFF;
+        }
+        
+        .meta-label {
+            font-weight: bold;
+            color: #007BFF;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .meta-value {
+            color: #333;
+        }
+        
+        .students-list {
+            background: #e3f2fd;
+            border-right: 3px solid #2196f3;
+        }
+        
+        .students-list .meta-label {
+            color: #1976d2;
+        }
+        
+        .student-name {
+            background: #bbdefb;
+            padding: 5px 10px;
+            margin: 3px 0;
+            border-radius: 15px;
+            display: inline-block;
+            font-size: 0.9em;
+            font-weight: 500;
+            color: #0d47a1;
+        }
+        
+        .supervisor-info {
+            background: #f3e5f5;
+            border-right: 3px solid #9c27b0;
+        }
+        
+        .supervisor-info .meta-label {
+            color: #7b1fa2;
+        }
+        
+        .result-abstract {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .result-actions {
+            text-align: center;
+        }
+        
+        .pdf-link {
+            background: #28a745;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .pdf-link:hover {
+            background: #218838;
+            transform: scale(1.05);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .pdf-link:before {
+            content: "📄 ";
+        }
+        
+        .back-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .back-link {
+            background: white;
+            color: #007BFF;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 0 10px;
+        }
+        
+        .back-link:hover {
+            background: #007BFF;
+            color: white;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        
+        .debug-section {
+            background: #343a40;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+        
+        .debug-section h4 {
+            color: #ffc107;
+            margin-top: 0;
+        }
+        
+        .debug-section pre {
+            background: #495057;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            
+            .result-meta {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .result-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 نتائج البحث</h1>
+        </div>
+        
+        {% if query %}
+        <div class="search-info">
+            <strong>البحث عن:</strong> "{{ query }}"
+        </div>
+        {% endif %}
+        
+        {% if results %}
+            <div class="results-count">
+                تم العثور على {{ results|length }} نتيجة
+            </div>
+            
+            {% for result in results %}
+            <div class="result-card">
+                <div class="result-title">
+                    {{ result.title }}
+                </div>
+                
+                <div class="result-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">القسم:</span>
+                        <span class="meta-value">{{ result.department.split('_')[-1].replace('_', ' ') if '_' in result.department else result.department }}</span>
+                    </div>
+                    
+                    <div class="meta-item">
+                        <span class="meta-label">السنة الدراسية:</span>
+                        <span class="meta-value">{{ result.year }}</span>
+                    </div>
+                    
+                    {% if result.students and result.students != 'غير محدد' %}
+                    <div class="meta-item students-list">
+                        <span class="meta-label">أسماء الطلاب:</span>
+                        <span class="meta-value">
+                            {% set student_names = result.students.split(', ') %}
+                            {% for student in student_names %}
+                                <div class="student-name">👨‍🎓 {{ student.strip() }}</div>
+                            {% endfor %}
+                        </span>
+                    </div>
+                    {% endif %}
+                    
+                    {% if result.supervisor and result.supervisor != 'غير محدد' %}
+                    <div class="meta-item supervisor-info">
+                        <span class="meta-label">المشرف:</span>
+                        <span class="meta-value">{{ result.supervisor }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                {% if result.abstract and result.abstract != 'غير متوفر' %}
+                <div class="result-abstract">
+                    <strong>الملخص:</strong><br>
+                    {{ result.abstract[:500] }}{% if result.abstract|length > 500 %}...{% endif %}
+                </div>
+                {% endif %}
+                
+                {% if result.pdf %}
+                <div class="result-actions">
+                    <a href="{{ result.pdf }}" target="_blank" class="pdf-link">
+                        تحميل الملف الكامل
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            
+        {% else %}
+            <div class="no-results">
+                <h3>😔 لم يتم العثور على نتائج</h3>
+                <p>لم نتمكن من العثور على مشاريع تطابق بحثك.</p>
+                <p><strong>اقتراحات:</strong></p>
+                <ul style="text-align: right; display: inline-block;">
+                    <li>تأكد من صحة الكلمات المكتوبة</li>
+                    <li>جرب كلمات مفتاحية أخرى</li>
+                    <li>استخدم مصطلحات أكثر عمومية</li>
+                    <li>جرب البحث بالإنجليزية أو العربية</li>
+                </ul>
+            </div>
+        {% endif %}
+        
+        <div class="back-section">
+            <a href="/search" class="back-link">🔍 بحث جديد</a>
+            <a href="/" class="back-link">🏠 الصفحة الرئيسية</a>
+        </div>
+        
+        {% if debug_info %}
+        <div class="debug-section">
+            <h4>معلومات التشخيص (للمطورين)</h4>
+            
+            {% if debug_info.error %}
+            <div style="color: #dc3545; background: #f8d7da; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+                <strong>خطأ:</strong> {{ debug_info.error }}
+            </div>
+            {% endif %}
+            
+            {% if debug_info.extracted_terms %}
+            <div>
+                <strong>المصطلحات المستخرجة:</strong>
+                <pre>{{ debug_info.extracted_terms | tojson(indent=2) }}</pre>
+            </div>
+            {% endif %}
+            
+            {% if debug_info.sparql_query %}
+            <div>
+                <strong>استعلام SPARQL:</strong>
+                <pre>{{ debug_info.sparql_query }}</pre>
+            </div>
+            {% endif %}
+            
+            {% if debug_info.response_status %}
+            <div>
+                <strong>حالة الاستجابة:</strong> {{ debug_info.response_status }}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+

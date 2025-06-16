@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقديم مشروع تخرج</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #007BFF, #0056b3);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .form-section {
+            padding: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #007BFF;
+            box-shadow: 0 0 10px rgba(0,123,255,0.2);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .duplicate-check-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007BFF;
+        }
+        
+        .check-duplicate-btn {
+            background: #17a2b8;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .check-duplicate-btn:hover {
+            background: #138496;
+        }
+        
+        .duplicate-result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .duplicate-result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .duplicate-result.warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+        
+        .duplicate-result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .submit-btn {
+            background: #28a745;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .submit-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+        
+        .flash-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .flash-message.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .flash-message.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .flash-message.warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .back-link a {
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: 2px solid #007BFF;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link a:hover {
+            background: #007BFF;
+            color: white;
+        }
+        
+        .required {
+            color: #dc3545;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .form-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 تقديم مشروع تخرج</h1>
+            <p>نموذج تقديم مشروع التخرج مع التحقق من التكرار</p>
+        </div>
+        
+        <div class="form-section">
+            <!-- عرض رسائل Flash -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message {{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <!-- عرض نتائج التحقق من التكرار إذا وجدت -->
+            {% if duplicate_result %}
+                <div class="duplicate-result error" style="display: block;">
+                    <h4>⚠️ تم اكتشاف تكرار في المشروع</h4>
+                    <p><strong>{{ duplicate_result.duplicate_details.message }}</strong></p>
+                    {% if duplicate_result.duplicate_details.existing_projects %}
+                        <p>المشاريع المشابهة:</p>
+                        <ul>
+                            {% for project in duplicate_result.duplicate_details.existing_projects %}
+                                <li>{{ project.title }} - {{ project.supervisor }} ({{ project.year }})</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endif %}
+            
+            <form action="/submit" method="POST" enctype="multipart/form-data" id="submitForm">
+                <div class="form-group">
+                    <label for="student_name">اسم الطالب الرئيسي <span class="required">*</span></label>
+                    <input type="text" 
+                           id="student_name" 
+                           name="student_name" 
+                           value="{{ form_data.student_name if form_data else '' }}"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="group_members">أسماء الطلبة المشاركين (اختياري)</label>
+                    <textarea id="group_members" 
+                              name="group_members" 
+                              placeholder="أدخل أسماء الطلبة المشاركين، كل اسم في سطر منفصل أو مفصولة بفواصل">{{ form_data.group_members if form_data else '' }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">عنوان المشروع <span class="required">*</span></label>
+                    <input type="text" 
+                           id="title" 
+                           name="title" 
+                           value="{{ form_data.title if form_data else '' }}"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="supervisor_name">اسم المشرف <span class="required">*</span></label>
+                    <input type="text" 
+                           id="supervisor_name" 
+                           name="supervisor_name" 
+                           value="{{ form_data.supervisor_name if form_data else '' }}"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="department">القسم <span class="required">*</span></label>
+                    <select id="department" name="department" required>
+                        <option value="">اختر القسم</option>
+                        <option value="علوم_الحاسوب" {{ 'selected' if form_data and form_data.department == 'علوم_الحاسوب' else '' }}>علوم الحاسوب</option>
+                        <option value="نظم_الإنترنت" {{ 'selected' if form_data and form_data.department == 'نظم_الإنترنت' else '' }}>نظم الإنترنت</option>
+                        <option value="الوسائط_المتعددة" {{ 'selected' if form_data and form_data.department == 'الوسائط_المتعددة' else '' }}>الوسائط المتعددة</option>
+                        <option value="أمن_المعلومات" {{ 'selected' if form_data and form_data.department == 'أمن_المعلومات' else '' }}>أمن المعلومات</option>
+                        <option value="هندسة_البرمجيات" {{ 'selected' if form_data and form_data.department == 'هندسة_البرمجيات' else '' }}>هندسة البرمجيات</option>
+                        <option value="الذكاء_الاصطناعي" {{ 'selected' if form_data and form_data.department == 'الذكاء_الاصطناعي' else '' }}>الذكاء الاصطناعي</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="academic_year">السنة الأكاديمية <span class="required">*</span></label>
+                    <select id="academic_year" name="academic_year" required>
+                        <option value="">اختر السنة</option>
+                        <option value="2025" {{ 'selected' if form_data and form_data.academic_year == '2025' else '' }}>2025</option>
+                        <option value="2024" {{ 'selected' if form_data and form_data.academic_year == '2024' else '' }}>2024</option>
+                        <option value="2023" {{ 'selected' if form_data and form_data.academic_year == '2023' else '' }}>2023</option>
+                        <option value="2022" {{ 'selected' if form_data and form_data.academic_year == '2022' else '' }}>2022</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="abstract">ملخص المشروع <span class="required">*</span></label>
+                    <textarea id="abstract" 
+                              name="abstract" 
+                              placeholder="أدخل ملخصاً مفصلاً عن مشروعك، أهدافه، والتقنيات المستخدمة..."
+                              required>{{ form_data.abstract if form_data else '' }}</textarea>
+                </div>
+
+                <!-- قسم التحقق من التكرار -->
+                <div class="duplicate-check-section">
+                    <h4>🔍 التحقق من تكرار المشروع</h4>
+                    <p>يُنصح بالتحقق من عدم تكرار مشروعك قبل التقديم النهائي</p>
+                    <button type="button" class="check-duplicate-btn" onclick="checkDuplicate()">
+                        التحقق من التكرار
+                    </button>
+                    <div id="duplicateResult" class="duplicate-result"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pdf_file">رفع ملف المشروع (PDF) <span class="required">*</span></label>
+                    <input type="file" 
+                           id="pdf_file" 
+                           name="pdf_file" 
+                           accept="application/pdf" 
+                           required>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitButton">
+                    📤 تقديم المشروع
+                </button>
+            </form>
+            
+            <div class="back-link">
+                <a href="/">🏠 العودة للصفحة الرئيسية</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkDuplicate() {
+            const title = document.getElementById('title').value.trim();
+            const supervisor = document.getElementById('supervisor_name').value.trim();
+            const studentName = document.getElementById('student_name').value.trim();
+            const groupMembers = document.getElementById('group_members').value.trim();
+            
+            if (!title || !supervisor) {
+                alert('يرجى إدخال عنوان المشروع واسم المشرف أولاً');
+                return;
+            }
+            
+            // تحضير قائمة الطلاب
+            const students = [studentName];
+            if (groupMembers) {
+                const additionalStudents = groupMembers.split(/[,\n]/).map(s => s.trim()).filter(s => s);
+                students.push(...additionalStudents);
+            }
+            
+            const checkButton = document.querySelector('.check-duplicate-btn');
+            const resultDiv = document.getElementById('duplicateResult');
+            
+            checkButton.textContent = 'جاري التحقق...';
+            checkButton.disabled = true;
+            
+            fetch('/submit/check-duplicate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: title,
+                    supervisor: supervisor,
+                    students: students
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayDuplicateResult(data, resultDiv);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                resultDiv.innerHTML = '<p style="color: red;">حدث خطأ أثناء التحقق من التكرار</p>';
+                resultDiv.style.display = 'block';
+            })
+            .finally(() => {
+                checkButton.textContent = 'التحقق من التكرار';
+                checkButton.disabled = false;
+            });
+        }
+        
+        function displayDuplicateResult(data, resultDiv) {
+            const result = data.duplicate_result;
+            const summary = data.summary;
+            
+            let html = '';
+            let className = '';
+            
+            if (result.is_duplicate) {
+                className = 'error';
+                html = `
+                    <h4>❌ تم اكتشاف تكرار</h4>
+                    <p><strong>${summary.message}</strong></p>
+                    <ul>
+                        ${summary.details.map(detail => `<li>${detail}</li>`).join('')}
+                    </ul>
+                    ${summary.recommendations.length > 0 ? `
+                        <p><strong>التوصيات:</strong></p>
+                        <ul>
+                            ${summary.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                        </ul>
+                    ` : ''}
+                `;
+                
+                // تعطيل زر التقديم
+                document.getElementById('submitButton').disabled = true;
+                document.getElementById('submitButton').textContent = '❌ لا يمكن التقديم - مشروع مكرر';
+            } else {
+                className = 'success';
+                html = `<h4>✅ ${summary.message}</h4>`;
+                
+                if (result.warnings && result.warnings.length > 0) {
+                    className = 'warning';
+                    html += `
+                        <p><strong>تحذيرات:</strong></p>
+                        <ul>
+                            ${result.warnings.map(warning => `<li>${warning.message}</li>`).join('')}
+                        </ul>
+                    `;
+                    
+                    if (summary.recommendations.length > 0) {
+                        html += `
+                            <p><strong>التوصيات:</strong></p>
+                            <ul>
+                                ${summary.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                            </ul>
+                        `;
+                    }
+                }
+                
+                // تفعيل زر التقديم
+                document.getElementById('submitButton').disabled = false;
+                document.getElementById('submitButton').textContent = '📤 تقديم المشروع';
+            }
+            
+            resultDiv.className = `duplicate-result ${className}`;
+            resultDiv.innerHTML = html;
+            resultDiv.style.display = 'block';
+        }
+        
+        // التحقق التلقائي عند تغيير العنوان أو المشرف
+        let checkTimeout;
+        function autoCheck() {
+            clearTimeout(checkTimeout);
+            checkTimeout = setTimeout(() => {
+                const title = document.getElementById('title').value.trim();
+                const supervisor = document.getElementById('supervisor_name').value.trim();
+                
+                if (title && supervisor) {
+                    checkDuplicate();
+                }
+            }, 1000); // انتظار ثانية واحدة بعد التوقف عن الكتابة
+        }
+        
+        document.getElementById('title').addEventListener('input', autoCheck);
+        document.getElementById('supervisor_name').addEventListener('input', autoCheck);
+    </script>
+</body>
+</html>
+

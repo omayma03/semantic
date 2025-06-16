@@ -1,0 +1,5 @@
+20:28:31 INFO  Server          :: Apache Jena Fuseki 5.4.0
+20:28:31 INFO  Config          :: Fuseki Base = F:\New folder (62)\semantic_project_fixed\apache-jena-fuseki-5.4.0\run
+20:28:31 INFO  Config          :: Database: /C:/Program Files/Git/graduation
+20:28:31 INFO  Config          :: UI Base = fuseki-server.jar
+String '/C:/Program Files/Git/graduation' not valid as 'service'
