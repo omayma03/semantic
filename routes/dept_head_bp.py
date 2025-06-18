@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, flash, session, jsonify
 import hashlib
 import re
-
+from routes.approve_bp import approve_and_store_project # <--- أضف هذا السطر
 dept_head_bp = Blueprint('dept_head_bp', __name__)
 
 # قاعدة بيانات رؤساء الأقسام (في التطبيق الحقيقي، ستكون في قاعدة بيانات)
@@ -10,37 +10,37 @@ DEPARTMENT_HEADS = {
         'name': 'د. أحمد محمد الصالح',
         'email': 'ahmed.saleh@misuratau.edu.ly',
         'password_hash': hashlib.sha256('cs_head_2025'.encode()).hexdigest(),
-        'department': 'علوم الحاسوب'
+        'department': 'علوم_الحاسوب'
     },
     'نظم_الإنترنت': {
         'name': 'د. فاطمة علي النجار',
         'email': 'fatima.najjar@misuratau.edu.ly',
         'password_hash': hashlib.sha256('is_head_2025'.encode()).hexdigest(),
-        'department': 'نظم الإنترنت'
+        'department': 'نظم_الإنترنت'
     },
     'الوسائط_المتعددة': {
         'name': 'د. محمد عبدالله الزروق',
         'email': 'mohammed.zarrouk@misuratau.edu.ly',
         'password_hash': hashlib.sha256('mm_head_2025'.encode()).hexdigest(),
-        'department': 'الوسائط المتعددة'
+        'department': 'الوسائط_المتعددة'
     },
     'أمن_المعلومات': {
         'name': 'د. سارة أحمد المبروك',
         'email': 'sara.mabrouk@misuratau.edu.ly',
         'password_hash': hashlib.sha256('sec_head_2025'.encode()).hexdigest(),
-        'department': 'أمن المعلومات'
+        'department': 'أمن_المعلومات'
     },
     'هندسة_البرمجيات': {
         'name': 'د. عمر محمد الطاهر',
         'email': 'omar.taher@misuratau.edu.ly',
         'password_hash': hashlib.sha256('se_head_2025'.encode()).hexdigest(),
-        'department': 'هندسة البرمجيات'
+        'department': 'هندسة_البرمجيات'
     },
     'الذكاء_الاصطناعي': {
         'name': 'د. ليلى عبدالرحمن القذافي',
         'email': 'laila.gaddafi@misuratau.edu.ly',
         'password_hash': hashlib.sha256('ai_head_2025'.encode()).hexdigest(),
-        'department': 'الذكاء الاصطناعي'
+        'department': 'الذكاء_الاصطناعي'
     }
 }
 
@@ -130,62 +130,61 @@ def logout():
 
 @dept_head_bp.route('/approve-department-project', methods=['POST'])
 def approve_department_project():
-    """اعتماد مشروع من قبل رئيس القسم"""
+    """اعتماد مشروع من قبل رئيس القسم وحفظه مباشرة في قاعدة البيانات"""
     if not session.get('dept_head_logged_in'):
         return jsonify({'success': False, 'message': 'غير مخول'}), 401
-    
+
     try:
         data = request.get_json()
         project_index = data.get('project_index')
         action = data.get('action')
         comments = data.get('comments', '')
-        
+
         # استيراد قائمة المشاريع المعلقة
         from routes.submit_bp import pending_projects
-        
-        if project_index is None or project_index >= len(pending_projects):
-            return jsonify({'success': False, 'message': 'مشروع غير موجود'}), 400
-        
+
+        if project_index is None or not (0 <= project_index < len(pending_projects)):
+            return jsonify({'success': False, 'message': 'مشروع غير موجود أو فهرس خاطئ'}), 400
+
         project = pending_projects[project_index]
         department = session.get('dept_head_department')
-        
-        # التحقق من أن المشروع ينتمي لقسم رئيس القسم
+
         if project.get('department') != department:
             return jsonify({'success': False, 'message': 'غير مخول لاعتماد هذا المشروع'}), 403
-        
+
         if action == 'approve':
-            project['dept_head_approval'] = True
-            project['dept_head_comments'] = comments
-            project['approved_by'] = session.get('dept_head_name')
-            project['status'] = 'approved_by_dept_head'
-            
-            # نقل المشروع إلى مرحلة الاعتماد النهائي
-            # بدلاً من الحفظ المباشر في Fuseki، ننقله لواجهة الاعتماد النهائي
-            return jsonify({
-                'success': True, 
-                'message': 'تم اعتماد المشروع من قبل رئيس القسم. في انتظار الاعتماد النهائي.'
-            })
-                
+            # --- التعديل الأساسي هنا ---
+            # الآن سنقوم باستدعاء دالة الحفظ النهائية مباشرة
+            project['dept_head_comments'] = comments # حفظ تعليق رئيس القسم
+            success = approve_and_store_project(project)
+
+            if success:
+                # إذا نجح الحفظ، قم بإزالة المشروع من قائمة الانتظار
+                pending_projects.pop(project_index)
+                return jsonify({
+                    'success': True, 
+                    'message': 'تم اعتماد المشروع وحفظه في قاعدة البيانات بنجاح.'
+                })
+            else:
+                return jsonify({
+                    'success': False, 
+                    'message': 'حدث خطأ أثناء حفظ المشروع في قاعدة البيانات.'
+                }), 500
+
         elif action == 'reject':
-            project['dept_head_approval'] = False
-            project['dept_head_comments'] = comments
-            project['rejected_by'] = session.get('dept_head_name')
-            project['status'] = 'rejected_by_dept_head'
-            
+            # منطق الرفض يبقى كما هو
             pending_projects.pop(project_index)
-            
             return jsonify({
                 'success': True, 
                 'message': 'تم رفض المشروع من قبل رئيس القسم'
             })
-        
+
         else:
             return jsonify({'success': False, 'message': 'إجراء غير صحيح'}), 400
-            
+
     except Exception as e:
         print(f"خطأ في معالجة طلب رئيس القسم: {e}")
         return jsonify({'success': False, 'message': 'حدث خطأ في الخادم'}), 500
-
 def get_department_projects(department):
     """جلب مشاريع القسم من قاعدة البيانات"""
     try:

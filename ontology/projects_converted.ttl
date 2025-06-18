@@ -1079,3 +1079,31 @@ gpo:Department_علوم_الحاسوب a gpo:Department .
 
 gpo:Department_نظم_الإنترنت a gpo:Department .
 
+
+
+@prefix gpo: <http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/project/نظام_إدارة_العيادات_الطبية_باستخدام_الويب_الدلالي> a gpo:Project ;
+    gpo:belongsToDepartment <http://example.org/department/الوسائط_المتعددة> ;
+    gpo:hasAbstract "يهدف هذا المشروع إلى إنشاء نظام ذكي لإدارة مواعيد المرضى والملفات الطبية في العيادات باستخدام تقنيات الأنطولوجيا لتسهيل البحث عن بيانات المرضى بشكل دلالي وآمن." ;
+    gpo:hasAcademicYear "2025"^^xsd:gYear ;
+    gpo:hasEnrolledStudent <http://example.org/student/عائشة_عمر_شكلاوون>,
+        <http://example.org/student/نور_الهدى_محمد> ;
+    gpo:hasFinalFile "http://localhost:5000/uploads\\9cc9685c-027d-4df9-be61-c26bff4f205a.pdf" ;
+    gpo:hasProjectName "نظام إدارة العيادات الطبية باستخدام الويب الدلالي" ;
+    gpo:hasStatus "approved" ;
+    gpo:isSupervisedBySupervisor <http://example.org/supervisor/علي_سالم> .
+
+<http://example.org/department/الوسائط_المتعددة> a gpo:Department ;
+    gpo:hasName "الوسائط_المتعددة" .
+
+<http://example.org/student/عائشة_عمر_شكلاوون> a gpo:Student ;
+    gpo:hasName "عائشة عمر شكلاوون" .
+
+<http://example.org/student/نور_الهدى_محمد> a gpo:Student ;
+    gpo:hasName "نور الهدى محمد" .
+
+<http://example.org/supervisor/علي_سالم> a gpo:Supervisor ;
+    gpo:hasName "علي سالم" .
+

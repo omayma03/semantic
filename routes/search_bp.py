@@ -1,235 +1,199 @@
+# الملف: routes/search_bp.py
+
 from flask import Blueprint, render_template, request, jsonify
 import requests
 import re
-from urllib.parse import quote
-from collections import defaultdict
 
 search_bp = Blueprint('search_bp', __name__)
 
-class SemanticSearchEngine:
-    """محرك بحث دلالي يفهم السياق ويستفيد من الأنطولوجيا لتحسين النتائج"""
+class SmartSearchEngine:
+    """محرك بحث ذكي يفهم السياق والعلاقات في النص الحر"""
     
     def __init__(self):
-        # قاموس الكلمات المفتاحية والمرادفات مع روابط دلالية
-        self.semantic_map = {
-            # أقسام الكلية
-            'علوم_الحاسوب': {
-                'synonyms': ['علوم الحاسوب', 'حاسوب', 'كمبيوتر', 'computer science', 'cs'],
-                'related_domains': ['الذكاء_الاصطناعي', 'تقنيات_الويب', 'قواعد_بيانات']
-            },
-            'نظم_الإنترنت': {
-                'synonyms': ['نظم الإنترنت', 'انترنت', 'شبكات', 'internet systems', 'networks'],
-                'related_domains': ['الشبكات', 'أمن_المعلومات']
-            },
-            'الوسائط_المتعددة': {
-                'synonyms': ['وسائط متعددة', 'ملتيميديا', 'multimedia', 'وسائط'],
-                'related_domains': ['معالجة_الصور', 'الواقع_المعزز']
-            },
-            # مجالات تقنية
-            'الذكاء_الاصطناعي': {
-                'synonyms': ['ذكاء اصطناعي', 'ai', 'artificial intelligence', 'machine learning', 'تعلم آلي'],
-                'related_terms': ['شبكات عصبية', 'تعلم عميق', 'تصنيف', 'تنبؤ'],
-                'related_domains': ['معالجة_اللغة_الطبيعية', 'تنقيب_البيانات']
-            },
-            'أمن_المعلومات': {
-                'synonyms': ['أمن', 'حماية', 'security', 'cybersecurity', 'أمان'],
-                'related_terms': ['تشفير', 'هجمات', 'اختراق'],
-                'related_domains': ['الشبكات']
-            },
-            'قواعد_بيانات': {
-                'synonyms': ['قاعدة بيانات', 'database', 'sql', 'بيانات'],
-                'related_terms': ['استعلام', 'تخزين', 'إدارة بيانات'],
-                'related_domains': ['تنقيب_البيانات']
-            },
-            # سنوات
-            'سنة': {
-                'synonyms': ['2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015'],
-                'related_terms': []
-            },
-            # كلمات عامة
-            'مشروع': {
-                'synonyms': ['مشروع', 'project', 'تخرج', 'graduation'],
-                'related_terms': ['عمل جماعي', 'بحث']
-            },
-            'طالب': {
-                'synonyms': ['طالب', 'student', 'دارس'],
-                'related_terms': ['مجموعة', 'فريق']
-            },
-            'مشرف': {
-                'synonyms': ['مشرف', 'supervisor', 'دكتور', 'أستاذ'],
-                'related_terms': ['مرشد', 'موجه']
-            }
+        self.keywords_map = {
+            'علوم_الحاسوب': ['علوم الحاسوب', 'حاسوب', 'كمبيوتر', 'computer science', 'cs'],
+            'نظم_الإنترنت': ['نظم الإنترنت', 'انترنت', 'شبكات', 'internet systems', 'networks'],
+            'الوسائط_المتعددة': ['وسائط متعددة', 'ملتيميديا', 'multimedia', 'وسائط'],
+            'هندسة_البرمجيات': ['هندسة البرمجيات', 'software engineering', 'se'],
+            'نظم_المعلومات': ['نظم المعلومات', 'information systems', 'is'],
+            'الشبكات_والاتصالات': ['الشبكات والاتصالات', 'telecommunications'],
+            'ذكاء_اصطناعي': ['ذكاء اصطناعي', 'ai', 'artificial intelligence', 'machine learning', 'تعلم آلي'],
+            'أمن_معلومات': ['أمن', 'حماية', 'security', 'cybersecurity', 'أمان', 'sql injection', 'xss'],
+            'قواعد_بيانات': ['قاعدة بيانات', 'database', 'sql', 'بيانات'],
+            'تطبيقات_موبايل': ['موبايل', 'هاتف', 'mobile', 'android', 'ios', 'flutter'],
+            'مواقع_ويب': ['موقع', 'ويب', 'web', 'website', 'html', 'css', 'javascript', 'pwa'],
+            'iot': ['انترنت الأشياء', 'iot', 'internet of things', 'استشعار'],
+            'تحليل_بيانات': ['تحليل', 'إحصاء', 'data analysis', 'statistics', 'visualization', 'power bi'],
         }
         
-        # توحيد الكلمات المفتاحية لتسهيل البحث
-        self.keyword_to_category = {}
-        for category, data in self.semantic_map.items():
-            for synonym in data['synonyms']:
-                self.keyword_to_category[synonym.lower()] = category
-    
-    def preprocess_query(self, query):
-        """معالجة النص المدخل وتنظيفه"""
-        query = query.strip().lower()
-        # إزالة التشكيل العربي
-        query = re.sub(r'[\u064B-\u0652]', '', query)
-        # توحيد الألف
-        query = re.sub(r'[إأآا]', 'ا', query)
-        # توحيد الياء
-        query = re.sub(r'[يى]', 'ي', query)
-        # إزالة الرموز الخاصة
-        query = re.sub(r'[^\w\s\u0600-\u06FF]', ' ', query)
-        return query
-    
-    def extract_semantic_terms(self, query):
-        """استخراج المصطلحات الدلالية من النص المدخل"""
-        processed_query = self.preprocess_query(query)
-        words = processed_query.split()
+        self.context_triggers = {
+            'supervisor': ['مشرف', 'الدكتور', 'دكتور', 'استاذ', 'أستاذ', 'للدكتور', 'بإشراف', 'اشراف', 'لأستاذ', 'استاذة', 'للدكتورة', 'دكتورة'],
+            'student': ['طالب', 'الطالب', 'للطالب', 'بواسطة'],
+            'department': ['قسم', 'بقسم', 'في قسم'],
+            'year': ['سنة', 'عام', 'في سنة', 'لسنة']
+        }
         
+        # --- الإضافة الجديدة: قائمة بالكلمات العامة التي يجب تجاهلها ---
+        self.stop_words = ['كل', 'جميع', 'مشاريع', 'مشروع', 'ابحث', 'عن', 'في', 'اريد', 'أريد', 'بحث', 'تخرج', 'graduation', 'project']
+
+    def extract_search_terms(self, query):
+        """
+        دالة ذكية ومطورة لاستخراج المصطلحات والسياق من النص المدخل.
+        """
+        original_query = query # نحتفظ بالنسخة الأصلية للاستخدام لاحقاً
+        query_lower = query.strip().lower()
+
         extracted_terms = {
-            'categories': set(),
+            'supervisor_names': [],
+            'student_names': [],
             'departments': [],
-            'technical_fields': [],
             'years': [],
-            'general_terms': [],
-            'related_domains': set(),
-            'related_terms': set(),
-            'original_query': query
+            'general_terms': []
         }
         
-        # تحديد الكلمات المفتاحية والمصطلحات المتعلقة
-        for word in words:
-            if word in self.keyword_to_category:
-                category = self.keyword_to_category[word]
-                extracted_terms['categories'].add(category)
-                
-                if category in ['علوم_الحاسوب', 'نظم_الإنترنت', 'الوسائط_المتعددة']:
-                    extracted_terms['departments'].append(category)
-                elif category in ['الذكاء_الاصطناعي', 'أمن_المعلومات', 'قواعد_بيانات']:
-                    extracted_terms['technical_fields'].append(word)
-                elif category == 'سنة':
-                    extracted_terms['years'].append(word)
-                else:
-                    extracted_terms['general_terms'].append(word)
-                
-                # إضافة المجالات والمصطلحات المتعلقة
-                if 'related_domains' in self.semantic_map[category]:
-                    extracted_terms['related_domains'].update(self.semantic_map[category]['related_domains'])
-                if 'related_terms' in self.semantic_map[category]:
-                    extracted_terms['related_terms'].update(self.semantic_map[category]['related_terms'])
-            else:
-                if len(word) > 2:
-                    extracted_terms['general_terms'].append(word)
+        # متغير لتتبع ما إذا تم العثور على محددات قوية
+        found_specific_filter = False
+
+        # الخطوة 1: استخراج الكيانات المحددة (مشرف، طالب، قسم، سنة)
+        for context, triggers in self.context_triggers.items():
+            for trigger in triggers:
+                match = re.search(fr'\b{trigger}\s+([\u0600-\u06FF\w]+(?:\s+[\u0600-\u06FF\w]+)?)', original_query, re.IGNORECASE)
+                if match:
+                    found_specific_filter = True
+                    entity_name = match.group(1).strip()
+                    if context == 'supervisor':
+                        extracted_terms['supervisor_names'].append(entity_name)
+                    elif context == 'student':
+                        extracted_terms['student_names'].append(entity_name)
+                    elif context == 'department':
+                        for dept_key, dept_synonyms in self.keywords_map.items():
+                            if entity_name.lower() in [s.lower() for s in dept_synonyms]:
+                                extracted_terms['departments'].append(dept_key)
+                                break
+                    elif context == 'year':
+                        year_match = re.search(r'\d{4}', entity_name)
+                        if year_match:
+                            extracted_terms['years'].append(year_match.group(0))
+                    
+                    original_query = original_query.replace(match.group(0), '', 1)
+
+        # الخطوة 2: استخراج الأقسام والسنوات المتبقية
+        found_years = re.findall(r'\b(20[1-2][0-9])\b', original_query)
+        if found_years:
+            found_specific_filter = True
+            extracted_terms['years'].extend(found_years)
+            for year in found_years:
+                original_query = original_query.replace(year, '')
+            
+        for category, keywords in self.keywords_map.items():
+            if category.startswith(('علوم', 'نظم', 'هندسة', 'وسائط', 'شبكات')):
+                 for keyword in keywords:
+                    if keyword.lower() in query_lower:
+                        found_specific_filter = True
+                        extracted_terms['departments'].append(category)
+                        original_query = re.sub(re.escape(keyword), '', original_query, flags=re.IGNORECASE)
+
+        # الخطوة 3: ما تبقى من النص يعتبر مصطلحات عامة
+        remaining_words = original_query.strip().split()
+        for word in remaining_words:
+            # --- تعديل: تجاهل كلمات التوقف ---
+            if len(word) > 2 and not word.isdigit() and word.lower() not in self.stop_words:
+                extracted_terms['general_terms'].append(word)
         
+        # إذا لم يتم إيجاد أي فلتر مخصص، اعتبر كل الكلمات كمصطلحات عامة
+        if not found_specific_filter:
+             extracted_terms['general_terms'] = [w for w in query_lower.split() if len(w) > 2]
+
+
+        # إزالة التكرار
+        for key, value in extracted_terms.items():
+            extracted_terms[key] = list(set(value))
+
         return extracted_terms
     
-    def build_semantic_sparql(self, search_terms):
-        """بناء استعلام SPARQL دلالي يستفيد من الأنطولوجيا"""
+    # دالة build_dynamic_sparql تبقى كما هي، لا تحتاج لتغيير
+    def build_dynamic_sparql(self, search_terms):
+        """
+        بناء استعلام SPARQL دقيق جدًا بناءً على الفهم السياقي للمدخلات.
+        """
         base_query = '''
         PREFIX gpo: <http://www.semanticweb.org/pc/ontologies/2025/5AcademicGraduationProjectsOntology/>
         
         SELECT DISTINCT ?project ?title ?department ?year ?abstract ?pdf 
                         (GROUP_CONCAT(DISTINCT ?studentName; separator=", ") AS ?students)
-                        ?supervisorName ?relevanceScore
+                        ?supervisorName
         WHERE {
             ?project a gpo:Project ;
                      gpo:hasProjectName ?title ;
-                     gpo:belongsToDepartment ?deptEntity ;
-                     gpo:hasAcademicYear ?year ;
-                     gpo:hasAbstract ?abstract ;
-                     gpo:hasEnrolledStudent ?studentEntity ;
-                     gpo:isSupervisedBySupervisor ?supervisorEntity .
-            
-            ?deptEntity gpo:hasName ?department .
-            ?studentEntity gpo:hasName ?studentName .
-            ?supervisorEntity gpo:hasName ?supervisorName .
-            
-            OPTIONAL { ?project gpo:hasFinalFile ?pdf }
-            OPTIONAL { ?project gpo:hasKeyword ?keyword . ?keyword gpo:hasKeywordText ?keywordText }
-            OPTIONAL { ?project gpo:belongsToDomain ?domain . ?domain gpo:hasDomainName ?domainName }
-            
-            # تعيين درجة الأهمية بناءً على التطابقات
-            BIND (
-                (IF(REGEX(LCASE(STR(?title)), LCASE("{search_text}"), "i"), 5, 0) +
-                 IF(REGEX(LCASE(STR(?abstract)), LCASE("{search_text}"), "i"), 3, 0) +
-                 IF(REGEX(LCASE(STR(?keywordText)), LCASE("{search_text}"), "i"), 2, 0) +
-                 IF(REGEX(LCASE(STR(?domainName)), LCASE("{search_text}"), "i"), 2, 0)) AS ?relevanceScore
-            )
+                     gpo:hasAcademicYear ?year .
+
+            OPTIONAL {
+                ?project gpo:belongsToDepartment ?deptEntity .
+                BIND(REPLACE(STRAFTER(STR(?deptEntity), "Department_"), "_", " ") AS ?department)
+            }
+            OPTIONAL { ?project gpo:hasAbstract ?abstract . }
+            OPTIONAL {
+                ?project gpo:hasEnrolledStudent ?studentEntity .
+                ?studentEntity gpo:studentName ?studentName .
+            }
+            OPTIONAL {
+                ?project gpo:isSupervisedBySupervisor ?supervisorEntity .
+                ?supervisorEntity gpo:supervisorName ?supervisorName .
+            }
+            OPTIONAL { ?project gpo:hasFinalFile ?pdf . }
         '''
         
         filters = []
-        relevance_conditions = []
         
-        # فلاتر الأقسام
         if search_terms['departments']:
-            dept_filters = []
-            for dept in search_terms['departments']:
-                dept_filters.append(f'REGEX(STR(?department), "{dept}", "i")')
-            if dept_filters:
-                filters.append(f"({' || '.join(dept_filters)})")
+            dept_filters = [f'REGEX(?department, "{dept.replace("_", " ")}", "i")' for dept in search_terms['departments']]
+            filters.append(f"({' || '.join(dept_filters)})")
         
-        # فلاتر السنوات
         if search_terms['years']:
-            year_filters = []
-            for year in search_terms['years']:
-                year_filters.append(f'REGEX(STR(?year), "{year}")')
-            if year_filters:
-                filters.append(f"({' || '.join(year_filters)})")
-        
-        # فلاتر المصطلحات الدلالية (البحث في العنوان، الملخص، الكلمات المفتاحية، المجالات)
-        all_terms = (search_terms['general_terms'] + search_terms['technical_fields'] +
-                     list(search_terms['related_terms']) + list(search_terms['related_domains']))
-        
-        if all_terms:
-            text_filters = []
-            for term in set(all_terms):  # إزالة التكرار
-                if len(term) > 2:
-                    escaped_term = re.escape(term)
-                    text_filters.append(f'REGEX(LCASE(STR(?title)), LCASE("{escaped_term}"))')
-                    text_filters.append(f'REGEX(LCASE(STR(?abstract)), LCASE("{escaped_term}"))')
-                    text_filters.append(f'REGEX(LCASE(STR(?keywordText)), LCASE("{escaped_term}"))')
-                    text_filters.append(f'REGEX(LCASE(STR(?domainName)), LCASE("{escaped_term}"))')
+            year_filters = [f'STR(?year) = "{year}"' for year in search_terms['years']]
+            filters.append(f"({' || '.join(year_filters)})")
+
+        if search_terms['supervisor_names']:
+            sup_filters = [f'REGEX(?supervisorName, "{name}", "i")' for name in search_terms['supervisor_names']]
+            filters.append(f"({' || '.join(sup_filters)})")
             
+        if search_terms['student_names']:
+            stu_filters = [f'REGEX(?students, "{name}", "i")' for name in search_terms['student_names']]
+            filters.append(f"({' || '.join(stu_filters)})")
+
+        if search_terms['general_terms']:
+            text_filters = []
+            for term in search_terms['general_terms']:
+                term_filter_group = f'((REGEX(LCASE(STR(?title)), LCASE("{term}"))) || (BOUND(?abstract) && REGEX(LCASE(STR(?abstract)), LCASE("{term}"))))'
+                text_filters.append(term_filter_group)
             if text_filters:
-                filters.append(f"({' || '.join(text_filters)})")
-        
-        # إضافة الفلاتر للاستعلام
+              filters.append(f"({' && '.join(text_filters)})")
+                
         if filters:
             base_query += f'\n            FILTER ({" && ".join(filters)})'
         
-        # إضافة شرط درجة الأهمية
-        base_query += '\n            FILTER (?relevanceScore > 0)'
-        
-        # تنظيم النتائج
-        base_query += '\n        }\n        GROUP BY ?project ?title ?department ?year ?abstract ?pdf ?supervisorName ?relevanceScore'
-        base_query += '\n        ORDER BY DESC(?relevanceScore) ?title'
-        
-        # إضافة النص الأصلي للبحث
-        base_query = base_query.format(search_text=re.escape(search_terms['original_query']))
+        base_query += '\n        }\n        GROUP BY ?project ?title ?department ?year ?abstract ?pdf ?supervisorName\n        ORDER BY DESC(?year)'
         
         return base_query
 
-# إنشاء محرك البحث الدلالي
-semantic_search_engine = SemanticSearchEngine()
+
+# ... باقي الكود (search_engine, search, api_search) يبقى كما هو ...
+search_engine = SmartSearchEngine()
 
 @search_bp.route('/', methods=['GET', 'POST'])
 def search():
     if request.method == 'GET':
         return render_template('search_projects.html')
     
-    # الحصول على النص المدخل
     query_text = request.form.get('query', '').strip()
     
     if not query_text:
         return render_template('results.html', results=[], query=query_text, debug_info="لم يتم إدخال أي نص للبحث")
     
     try:
-        # استخراج المصطلحات الدلالية
-        search_terms = semantic_search_engine.extract_semantic_terms(query_text)
+        search_terms = search_engine.extract_search_terms(query_text)
+        sparql_query = search_engine.build_dynamic_sparql(search_terms)
         
-        # بناء استعلام SPARQL دلالي
-        sparql_query = semantic_search_engine.build_semantic_sparql(search_terms)
-        
-        # تنفيذ الاستعلام
         response = requests.post(
             'http://localhost:3030/graduation/sparql',
             data={'query': sparql_query},
@@ -256,8 +220,7 @@ def search():
                         'abstract': row.get('abstract', {}).get('value', 'غير متوفر'),
                         'pdf': row.get('pdf', {}).get('value', ''),
                         'students': row.get('students', {}).get('value', 'غير محدد'),
-                        'supervisor': row.get('supervisorName', {}).get('value', 'غير محدد'),
-                        'relevance_score': float(row.get('relevanceScore', {}).get('value', 0))
+                        'supervisor': row.get('supervisorName', {}).get('value', 'غير محدد')
                     }
                     results.append(result)
             
@@ -266,29 +229,20 @@ def search():
                                  query=query_text,
                                  debug_info=debug_info)
         else:
-            error_msg = f"خطأ في الاستعلام: {response.status_code} - {response.text}"
-            return render_template('results.html', 
-                                 results=[], 
-                                 query=query_text,
-                                 debug_info={'error': error_msg})
+            debug_info['error'] = f"خطأ في الاستعلام: {response.status_code} - {response.text}"
+            return render_template('results.html', results=[], query=query_text, debug_info=debug_info)
     
     except requests.exceptions.ConnectionError:
         error_msg = "لا يمكن الاتصال بخادم Fuseki. تأكد من تشغيل الخادم على المنفذ 3030"
-        return render_template('results.html', 
-                             results=[], 
-                             query=query_text,
-                             debug_info={'error': error_msg})
+        return render_template('results.html', results=[], query=query_text, debug_info={'error': error_msg})
     
     except Exception as e:
         error_msg = f"خطأ غير متوقع: {str(e)}"
-        return render_template('results.html', 
-                             results=[], 
-                             query=query_text,
-                             debug_info={'error': error_msg})
+        return render_template('results.html', results=[], query=query_text, debug_info={'error': error_msg})
 
 @search_bp.route('/api/search', methods=['POST'])
 def api_search():
-    """API endpoint للبحث الدلالي"""
+    """API endpoint للبحث (للاستخدام المستقبلي)"""
     data = request.get_json()
     query_text = data.get('query', '').strip()
     
@@ -296,8 +250,8 @@ def api_search():
         return jsonify({'error': 'لم يتم إدخال نص للبحث', 'results': []})
     
     try:
-        search_terms = semantic_search_engine.extract_semantic_terms(query_text)
-        sparql_query = semantic_search_engine.build_semantic_sparql(search_terms)
+        search_terms = search_engine.extract_search_terms(query_text)
+        sparql_query = search_engine.build_dynamic_sparql(search_terms)
         
         response = requests.post(
             'http://localhost:3030/graduation/sparql',
@@ -319,8 +273,7 @@ def api_search():
                         'abstract': row.get('abstract', {}).get('value', 'غير متوفر'),
                         'pdf': row.get('pdf', {}).get('value', ''),
                         'students': row.get('students', {}).get('value', 'غير محدد'),
-                        'supervisor': row.get('supervisorName', {}).get('value', 'غير محدد'),
-                        'relevance_score': float(row.get('relevanceScore', {}).get('value', 0))
+                        'supervisor': row.get('supervisorName', {}).get('value', 'غير محدد')
                     }
                     results.append(result)
             
@@ -334,4 +287,3 @@ def api_search():
     
     except Exception as e:
         return jsonify({'error': f'خطأ: {str(e)}', 'results': []})
-

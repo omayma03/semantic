@@ -9,65 +9,48 @@ submit_bp = Blueprint("submit_bp", __name__)
 
 pending_projects = []  # Temporary in-memory project storage
 
+# في ملف routes/submit_bp.py
+
 @submit_bp.route("/", methods=["GET", "POST"])
 def submit():
+    form_data = {}
     if request.method == "POST":
-        # Read form fields
-        student = request.form["student_name"]
-        group = request.form.get("group_members", "")
-        title = request.form["title"]
-        abstract = request.form["abstract"]
-        supervisor = request.form["supervisor_name"]
-        department = request.form["department"]
-        year = request.form["academic_year"]
-        pdf = request.files["pdf_file"]
+        try:
+            student = request.form["student_name"]
+            group = request.form.get("group_members", "")
+            title = request.form["title"]
+            abstract = request.form["abstract"]
+            supervisor = request.form["supervisor_name"]
+            department = request.form["department"]
+            year = request.form["academic_year"]
+            pdf = request.files["pdf_file"]
+            form_data = request.form
+        except KeyError as e:
+            flash(f"خطأ في النموذج، الحقل المطلوب {e} مفقود.", "error")
+            return redirect("/submit")
 
-        # تحضير قائمة الطلاب
-        students = [student]
+        students = [student.strip()]
         if group:
-            # تقسيم أسماء الطلاب الإضافيين (مفصولة بفواصل أو أسطر جديدة)
-            additional_students = [
-                s.strip() for s in group.replace("\n", ",").split(",") if s.strip()
-            ]
+            additional_students = [s.strip() for s in group.replace("\n", ",").split(",") if s.strip()]
             students.extend(additional_students)
 
-        # التحقق من تكرار المشروع باستخدام SPARQL
         duplicate_checker = DuplicateChecker()
-        duplicate_result = duplicate_checker.check_duplicate_project(
-            title, supervisor, students
-        )
-
-        # إذا كان المشروع مكرراً، رفض التقديم وإظهار رسالة خطأ
+        duplicate_result = duplicate_checker.check_duplicate_project(title, supervisor, students)
+        
         if duplicate_result["is_duplicate"]:
-            duplicate_summary = duplicate_checker.get_duplicate_summary(duplicate_result)
-            flash(
-                f"❌ تم رفض المشروع بسبب التكرار. {duplicate_summary['details'][0]}",
-                "error",
-            )
-            return render_template(
-                "submit_project.html",
-                duplicate_result=duplicate_result,
-                form_data=request.form,
-            )
+            # إذا كان مكرراً، أظهر الخطأ وتوقف هنا
+            flash(duplicate_result['duplicate_details']['message'], "error")
+            return render_template("submit_project.html", form_data=form_data, duplicate_result=duplicate_result)
 
-        # Save PDF file to uploads/ folder
+        # --- إذا لم يكن مكرراً، استمر هنا ---
+
+        # 1. حفظ ملف PDF
         filename = str(uuid.uuid4()) + ".pdf"
         path = os.path.join("uploads", filename)
         pdf.save(path)
 
-        # Prevent duplicate submission in memory (same student and title)
-        for p in pending_projects:
-            if p["title"] == title and p["student"] == student:
-                flash("هذا المشروع تم تقديمه مسبقاً في هذه الجلسة.", "warning")
-                return redirect("/submit")
-
-        # Extract keywords and detect domain from title + abstract
-        full_text = title + " " + abstract
-        keywords = extract_keywords(full_text)
-        domain = detect_domain(keywords)
-
-        # Prepare data for RDF generation
-        form_data = {
+        # 2. تحضير بيانات المشروع
+        project_data = {
             "student": student,
             "group": group,
             "students": students,
@@ -77,34 +60,17 @@ def submit():
             "department": department,
             "year": year,
             "pdf": f"http://localhost:5000/{path}",
-            "keywords": keywords,
-            "domain": domain,
-            "status": "pending",  # حالة المشروع: معلق للاعتماد
-            "duplicate_check": duplicate_result,
+            "status": "pending", # الحالة الأولية هي "معلق"
         }
+        
+        # 3. الإضافة إلى قائمة الانتظار فقط
+        pending_projects.append(project_data)
 
-        # لا نرسل البيانات إلى Fuseki مباشرة، بل نحفظها للاعتماد
-        # Generate RDF for preview but don't send to Fuseki yet
-        try:
-            rdf_data = create_project_rdf(form_data)
-            form_data["rdf_preview"] = rdf_data
-        except Exception as e:
-            print("Error while generating RDF preview:", e)
-            form_data["rdf_preview"] = None
-
-        # Temporarily store the project for approval
-        pending_projects.append(form_data)
-
-        # إعداد رسالة النجاح مع التحذيرات إن وجدت
-        success_message = "✅ تم تقديم المشروع بنجاح. في انتظار الاعتماد."
-        if duplicate_result["warnings"]:
-            warning_messages = [w["message"] for w in duplicate_result["warnings"]]
-            success_message += f" تحذيرات: {'; '.join(warning_messages)}"
-
-        flash(success_message, "success")
+        # 4. إظهار رسالة نجاح وإعادة التوجيه
+        flash("✅ تم تقديم المشروع بنجاح وهو الآن في انتظار الاعتماد.", "success")
         return redirect("/submit")
 
-    return render_template("submit_project.html")
+    return render_template("submit_project.html", form_data=form_data)
 
 
 @submit_bp.route("/check-duplicate", methods=["POST"])
